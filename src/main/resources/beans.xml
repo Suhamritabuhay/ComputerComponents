@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="computer" class="com.company.java.spring.xml.Computer">
+
+<!--        инициализация через сеттер:-->
+<!--        <property name="cpu" ref="amdCPU"/>-->
+<!--        или-->
+<!--        <property name="cpu" ref="intelCPU"/>-->
+
+<!--        инициализация через конструктор с параметрами:-->
+<!--        <constructor-arg name="cpu" ref="amdCPU"/>-->
+
+<!--        инициализация бином, изготовленным фабрикой:-->
+        <constructor-arg name="cpu" ref="staticFactoryCPU"/>
+
+
+    </bean>
+
+    <bean id="amdCPU" class="com.company.java.spring.xml.AmdCpu"/>
+    <bean id="intelCPU" class="com.company.java.spring.xml.IntelCpu"/>
+
+<!--    бин, сделанный фабрикой:-->
+    <bean id="staticFactoryCPU"
+          class="com.company.java.spring.xml.StaticCPUFactory"
+          factory-method="createCPU">
+<!--        это не конструктор класса, а аргумент метода:-->
+        <constructor-arg name="name" value="INTEL"/>
+    </bean>
+
+</beans>
